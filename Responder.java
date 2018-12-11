@@ -125,8 +125,18 @@ public class Responder
         Path path = Paths.get(FILE_OF_DEFAULT_RESPONSES);
         try (BufferedReader reader = Files.newBufferedReader(path, charset)) {
             String response = reader.readLine();
+            String responseBuild = "";
             while(response != null) {
-                defaultResponses.add(response);
+                if(response.trim().length() !=0){
+                    responseBuild += response + " ";
+                }
+                else {
+                    if(responseBuild.trim().length() !=0){
+                    defaultResponses.add(responseBuild);
+                    responseBuild = "";
+                }
+            }
+                
                 response = reader.readLine();
             }
         }
